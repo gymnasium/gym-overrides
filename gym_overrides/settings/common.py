@@ -17,3 +17,4 @@ def plugin_settings(settings):
     settings.OVERRIDE_CERTIFICATE_MESSAGE = 'gym_overrides.overrides.override_certificate_message._certificate_message'
     settings.OVERRIDE_DOWNLOADABLE_CERTIFICATE_MESSAGE = 'gym_overrides.overrides.override_certificate_message._downloadable_certificate_message'
     settings.OVERRIDE_GET_COURSE_TAB_LIST = 'gym_overrides.overrides.override_get_course_tab_list.get_course_tab_list'
+    settings.OVERRIDE_GET_CERT_PREVIEW_URL = 'gym_overrides.overrides.override_get_certPreviewUrl.get_certPreviewUrl'

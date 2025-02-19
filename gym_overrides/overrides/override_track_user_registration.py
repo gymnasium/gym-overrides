@@ -12,7 +12,8 @@ def override_track_user_registration(prev_fn, user, profile, params, third_party
     if hasattr(settings, 'LMS_SEGMENT_KEY') and settings.LMS_SEGMENT_KEY:
         try:
             market = user.extrainfo.market
-            extrainfo = {'market': market}
+            receive_job_offers = user.extrainfo.receive_job_offers
+            extrainfo = {'market': market, 'receive_job_offers': receive_job_offers}
         except Exception as e:
             logger.exception("Exception in extrainfo_dict: %s", e)
             extrainfo = ''

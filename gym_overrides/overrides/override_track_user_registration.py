@@ -12,8 +12,11 @@ def override_track_user_registration(prev_fn, user, profile, params, third_party
     if hasattr(settings, 'LMS_SEGMENT_KEY') and settings.LMS_SEGMENT_KEY:
         try:
             market = user.extrainfo.market
-            receive_job_offers = user.extrainfo.receive_job_offers
-            extrainfo = {'market': market, 'receive_job_offers': receive_job_offers}
+            subscribe_jobs = user.extrainfo.subscribe_jobs
+            extrainfo = {
+                'market': market,
+                'subscribe_jobs': subscribe_jobs,
+            }
         except Exception as e:
             logger.exception("Exception in extrainfo_dict: %s", e)
             extrainfo = ''
@@ -65,7 +68,8 @@ def override_track_user_registration(prev_fn, user, profile, params, third_party
         segment_traits = dict(properties)
         segment_traits['user_id'] = user.id
         segment_traits['joined_date'] = user.date_joined.strftime("%Y-%m-%d")
-        segment_traits['market'] = extrainfo if extrainfo else None
+        segment_traits['market'] = user.extrainfo.market if user.extrainfo.market else None
+        segment_traits['subscribe_jobs'] = user.extrainfo.subscribe_jobs if user.extrainfo.subscribe_jobs else False
         segment.track(
             user.id,
             "edx.bi.user.account.registered",
